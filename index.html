@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimateX - Animation Tool</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .navbar {
+            background-color: #4C8BF5;
+        }
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+        .navbar-toggler-icon {
+            color: #fff !important;
+        }
+        .btn-primary {
+            background-color: #4C8BF5;
+            border-color: #4C8BF5;
+        }
+        .btn-primary:hover {
+            background-color: #3578e5;
+            border-color: #3578e5;
+        }
+        .dark-mode {
+            background-color: #2c2c2c;
+            color: white;
+        }
+        .section-title {
+            margin-bottom: 40px;
+            font-weight: bold;
+            color: #4C8BF5;
+            font-size: 2rem;
+        }
+        .section-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .card-body {
+            padding: 30px;
+        }
+        .card-title {
+            font-size: 1.5rem;
+            color: #4C8BF5;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        .accordion-button {
+            font-size: 1.1rem;
+        }
+        .btn-dark-mode {
+            color: white;
+            background-color: #333;
+        }
+        .btn-dark-mode:hover {
+            background-color: #444;
+        }
+        .footer {
+            background-color: #4C8BF5;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .footer p {
+            margin: 0;
+        }
+        .copy-cdn-section {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+        }
+        .copy-cdn-section h3 {
+            color: #4C8BF5;
+        }
+        .copy-btn {
+            background-color: #4C8BF5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .copy-btn:hover {
+            background-color: #3578e5;
+        }
+        .copy-btn:focus {
+            outline: none;
+        }
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: none;
+            padding: 10px 20px;
+            background-color: #4C8BF5;
+            color: white;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .toast.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">AnimateX</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#how-to-use">How to Use</a></li>
+                    <li class="nav-item">
+                        <button id="toggleModeBtn" class="btn btn-dark-mode">Toggle Dark Mode</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="text-center py-5 animate__animated animate__fadeIn">
+        <div class="container">
+            <h1 class="display-4">Welcome to AnimateX</h1>
+            <p class="lead">Create stunning animations effortlessly with our powerful animation tool.</p>
+            <a href="#features" class="btn btn-primary">Learn More</a>
+        </div>
+    </section>
+
+    <!-- Copy CDN Section -->
+    <section class="copy-cdn-section">
+        <div class="container">
+            <h3 class="text-center">Copy CDN Links</h3>
+            <div class="row">
+                <!-- Link CDN -->
+                <div class="col-md-6">
+                    <label for="cdnLink" class="form-label">Link CDN</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="cdnLink" value="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" readonly>
+                        <button class="btn copy-btn" onclick="copyToClipboard('#cdnLink')">Copy</button>
+                    </div>
+                </div>
+                <!-- Simple CDN -->
+                <div class="col-md-6">
+                    <label for="cdnSimple" class="form-label">Simple CDN URL</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="cdnSimple" value="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" readonly>
+                        <button class="btn copy-btn" onclick="copyToClipboard('#cdnSimple')">Copy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+<section id="features" class="section-content">
+    <div class="container">
+        <h2 class="section-title text-center">Features</h2>
+        <div class="row">
+            <div class="col-md-4 animate__animated animate__fadeIn">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-plug"></i> Easy Integration</h5>
+                        <p>Integrate AnimateX with just a simple CDN link or download the package for offline use.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 animate__animated animate__fadeIn">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-cogs"></i> Powerful Animations</h5>
+                        <p>Animate elements with multiple customizable animation effects to enhance your website.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 animate__animated animate__fadeIn">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-mobile-alt"></i> Cross-platform Support</h5>
+                        <p>Compatible with desktop and mobile browsers, ensuring a consistent experience across devices.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Additional Features -->
+            <div class="col-md-4 animate__animated animate__fadeIn">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-user-check"></i> User-friendly Interface</h5>
+                        <p>Designed with simplicity in mind to ensure an intuitive and easy-to-use interface for everyone.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 animate__animated animate__fadeIn">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-shield-alt"></i> Robust Security</h5>
+                        <p>Strong security measures to ensure your animations and integration are safe and secure.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 animate__animated animate__fadeIn">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-cloud"></i> Cloud Sync</h5>
+                        <p>Sync your animations across devices and access your projects anywhere with cloud storage integration.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- How to Use Section -->
+    <section id="how-to-use" class="section-content bg-light">
+        <div class="container">
+            <h2 class="section-title text-center">How to Use</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Step 1: Add the CDN</h5>
+                    <p>Copy and paste the CDN link in your HTML file to start using AnimateX.</p>
+                </div>
+                <div class="col-md-6">
+                    <h5>Step 2: Add Animations</h5>
+                    <p>Choose your desired animation and apply it to any element on your page using the class names.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+  
+    <!-- FAQ Section -->
+    <section id="faq" class="section-content">
+        <div class="container">
+            <h2 class="section-title text-center">Frequently Asked Questions</h2>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            What is AnimateX?
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            AnimateX is a tool that allows you to easily add animations to your website with minimal effort.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            How do I implement AnimateX in my website?
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            You can implement AnimateX by simply including the CDN link in your HTML file or by downloading the package.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Is there a mobile version of AnimateX?
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Yes, AnimateX is compatible with all modern mobile browsers, providing seamless animations on mobile devices.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 AnimateX. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Toast Message -->
+    <div class="toast" id="toastMessage">
+        <p>Copied to clipboard!</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Dark Mode Toggle
+        document.getElementById('toggleModeBtn').addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+        });
+
+        // Copy to Clipboard Function
+        function copyToClipboard(element) {
+            var text = document.querySelector(element);
+            text.select();
+            document.execCommand('copy');
+
+            // Show Toast message
+            var toast = document.getElementById('toastMessage');
+            toast.classList.add('show');
+            setTimeout(function() {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
